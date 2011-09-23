@@ -1,0 +1,12 @@
+<%= content_for :sidebar do %>
+  <% if user_signed_in? %>
+    <%= link_to 'New Upload', new_upload_path %>
+  <% end %>
+<% end %>
+
+<% @uploads.each do |upload| %>
+  <%= render :partial => "shared/image", :locals => { :upload => upload } %>
+<% end %>
+
+<br style="clear:both;"/>
+<%= paginate @uploads %>

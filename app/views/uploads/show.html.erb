@@ -1,0 +1,12 @@
+
+<p>
+  <%= link_to image_tag(@upload.image.url, :class => "image"), @upload.image.url %>
+</p>
+
+<%= content_for :sidebar do %>
+  <p><%= @upload.views %> views<%=raw clippy path_to_url(@upload.image.url) %></p>
+  <p><%= @upload.tag_list %></p>
+  <% if user_signed_in? %>
+    <%= link_to 'Edit', edit_upload_path(@upload) %>
+  <% end %>
+<% end %>

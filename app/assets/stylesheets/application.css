@@ -1,0 +1,33 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+.thumb {
+  border: 1px solid #DFDFDF;
+  float: left;
+  margin: 10px;
+  padding: 8px;
+  height: 100px;
+  width: 100px;
+}
+
+.thumb:hover {
+  border: 1px solid #CCC;
+
+  box-shadow: 1px 1px 5px #999;
+  -moz-box-shadow: 1px 1px 5px #999;
+  -webkit-box-shadow: 1px 1px 5px #999;
+}
+
+.thumb-image {
+  height: 100px;
+  width: 100px;
+}
+
+.image {
+  max-width: 560px;
+}
