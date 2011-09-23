@@ -5,7 +5,6 @@ gem 'rails', '3.1.0'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 gem 'devise', '~> 1.4.5'
 gem 'paperclip', '~> 2.4.1'
 gem 'acts-as-taggable-on', '~> 2.1.0'
@@ -33,4 +32,12 @@ gem 'jquery-rails'
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
+end
+
+group :development do
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
 end
