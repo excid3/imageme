@@ -1,3 +1,4 @@
-<h1>Editing upload</h1>
-
-<%= render 'form' %>
+<%= form_for @upload, :url => upload_path(@upload), :html => { :class => "edit_upload", :id => "edit_upload" } do |f| -%>
+  <input name="_method" type="hidden" value="put" />
+  <%= render :partial => "form", :locals => {:f => f} %>
+<% end -%>

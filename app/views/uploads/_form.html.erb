@@ -1,25 +1,19 @@
-<%= form_for(@upload) do |f| %>
-  <% if @upload.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@upload.errors.count, "error") %> prohibited this upload from being saved:</h2>
 
-      <ul>
-      <% @upload.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="clearfix">
+   <%= f.label :title, t("activerecord.attributes.upload.title", :default => "Title"), :class => :label %>
+  <div class="input">
+    <%= f.text_field :title, :class => 'text_field' %>
+  </div>
+</div>
 
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= f.file_field :image %>
+<div class="clearfix">
+   <%= f.label :image, t("activerecord.attributes.upload.image", :default => "Image"), :class => :label %>
+  <div class="input">
+    <%= f.file_field :image, :class => 'file_field' %>
   </div>
-  <div class="field">
-    <%= f.label :tag_list, "Tags" %><br />
-    <%= f.text_field :tag_list %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+
+<div class="form-actions">
+  <button class="btn primary" type="submit">Save</button> or
+	<%= link_to "Cancel", uploads_path %>
+</div>

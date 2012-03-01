@@ -25,23 +25,23 @@ class UploadsControllerTest < ActionController::TestCase
   end
 
   test "should show upload" do
-    get :show, id: @upload.to_param
+    get :show, id: @upload
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @upload.to_param
+    get :edit, id: @upload
     assert_response :success
   end
 
   test "should update upload" do
-    put :update, id: @upload.to_param, upload: @upload.attributes
+    put :update, id: @upload, upload: @upload.attributes
     assert_redirected_to upload_path(assigns(:upload))
   end
 
   test "should destroy upload" do
     assert_difference('Upload.count', -1) do
-      delete :destroy, id: @upload.to_param
+      delete :destroy, id: @upload
     end
 
     assert_redirected_to uploads_path

@@ -1,52 +1,86 @@
 class UploadsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :search, :show]
+  before_filter :authenticate_user!, :except => [:index, :show]
 
+  # GET /uploads
+  # GET /uploads.json
   def index
-    @uploads = Upload.order("created_at DESC").page params[:page]
+    @uploads = Upload.all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @uploads }
+    end
   end
 
-  def search
-    @uploads = Upload.tagged_with(params[:query]).page params[:page]
-    render :action => :index
-  end
-
+  # GET /uploads/1
+  # GET /uploads/1.json
   def show
     @upload = Upload.find(params[:id])
-    @upload.increment!(:views)
+    @upload.increment! :views
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @upload }
+    end
   end
 
+  # GET /uploads/new
+  # GET /uploads/new.json
   def new
-    @upload = current_user.uploads.new
+    @upload = Upload.new
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @upload }
+    end
   end
 
+  # GET /uploads/1/edit
   def edit
     @upload = Upload.find(params[:id])
   end
 
+  # POST /uploads
+  # POST /uploads.json
   def create
-    @upload = current_user.uploads.new(params[:upload])
+    @upload = Upload.new(params[:upload])
 
-    if @upload.save
-      redirect_to @upload, notice: 'Upload was successfully created.'
-    else
-      render action: "new"
+    respond_to do |format|
+      if @upload.save
+        format.html { redirect_to @upload, notice: 'Upload was successfully created.' }
+        format.json { render json: @upload, status: :created, location: @upload }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @upload.errors, status: :unprocessable_entity }
+      end
     end
   end
 
+  # PUT /uploads/1
+  # PUT /uploads/1.json
   def update
     @upload = Upload.find(params[:id])
 
-    if @upload.update_attributes(params[:upload])
-      redirect_to @upload, notice: 'Upload was successfully updated.'
-    else
-      render action: "edit"
+    respond_to do |format|
+      if @upload.update_attributes(params[:upload])
+        format.html { redirect_to @upload, notice: 'Upload was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @upload.errors, status: :unprocessable_entity }
+      end
     end
   end
 
+  # DELETE /uploads/1
+  # DELETE /uploads/1.json
   def destroy
     @upload = Upload.find(params[:id])
     @upload.destroy
 
-    redirect_to uploads_url
+    respond_to do |format|
+      format.html { redirect_to uploads_url }
+      format.json { head :no_content }
+    end
   end
 end
